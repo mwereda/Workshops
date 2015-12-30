@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System;
+using Autofac;
+using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -14,17 +16,18 @@ namespace AutofacVsCastle
             protected override void Load(ContainerBuilder builder)
             {
                 builder.RegisterType<Dummy>().As<IDummy>();
+                builder.RegisterType<DummyFunc>().As<IDummyFunc>();
             }
         }
 
-        public void RegisterAutofac()
+        public IContainer RegisterAutofac()
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<AutofacModule>();
 
             var container = containerBuilder.Build();
 
-            var dummy = container.Resolve<IDummy>();
+            return container;
         }
 
         #endregion
@@ -36,15 +39,17 @@ namespace AutofacVsCastle
             public void Install(IWindsorContainer container, IConfigurationStore store)
             {
                 container.Register(Component.For<IDummy>().ImplementedBy<Dummy>());
+                container.Register(Component.For<IDummyFunc>().ImplementedBy<DummyFunc>());
             }
         }
 
-        public void RegisterCastle()
+        public WindsorContainer RegisterCastle()
         {
             var container = new WindsorContainer();
+            container.AddFacility<TypedFactoryFacility>();
             container.Install(new Installer());
 
-            var dummy = container.Resolve<IDummy>();
+            return container;
         }
 
         #endregion

@@ -6,22 +6,22 @@ namespace AutofacVsCastle
 {
     public class Registration
     {
-        public void RegisterAutofac()
+        public IContainer RegisterAutofac()
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterType<Dummy>().As<IDummy>();
 
             var container = containerBuilder.Build();
 
-            var dummy = container.Resolve<IDummy>();
+            return container;
         }
 
-        public void RegisterCastle()
+        public WindsorContainer RegisterCastle()
         {
             var container = new WindsorContainer();
             container.Register(Component.For<IDummy>().ImplementedBy<Dummy>());
 
-            var dummy = container.Resolve<IDummy>();
+            return container;
         }
     }
 }

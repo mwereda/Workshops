@@ -1,0 +1,6 @@
+﻿namespace AutofacVsCastle
+{
+    interface IDummyFunc
+    {
+    }
+}
