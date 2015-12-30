@@ -73,11 +73,14 @@
   <ItemGroup>
     <Compile Include="1_Container\Container.cs" />
     <Compile Include="2_RegisterDependencies\Dependencies\Dummy.cs" />
+    <Compile Include="2_RegisterDependencies\Dependencies\DummyDummy.cs" />
+    <Compile Include="2_RegisterDependencies\Dependencies\DummyEnumerable.cs" />
     <Compile Include="2_RegisterDependencies\Dependencies\DummyFunc.cs" />
     <Compile Include="2_RegisterDependencies\Dependencies\IDummy.cs" />
     <Compile Include="2_RegisterDependencies\Dependencies\IDummyFunc.cs" />
     <Compile Include="2_RegisterDependencies\Registration.cs" />
     <Compile Include="2_RegisterDependencies\RegistrationModules.cs" />
+    <Compile Include="3_Resolve\EnumerableResolver.cs" />
     <Compile Include="3_Resolve\FuncResolver.cs" />
     <Compile Include="3_Resolve\Resolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

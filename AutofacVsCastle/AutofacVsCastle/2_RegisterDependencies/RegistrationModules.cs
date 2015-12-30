@@ -1,7 +1,7 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 
@@ -16,7 +16,9 @@ namespace AutofacVsCastle
             protected override void Load(ContainerBuilder builder)
             {
                 builder.RegisterType<Dummy>().As<IDummy>();
+                builder.RegisterType<DummyDummy>().As<IDummy>();
                 builder.RegisterType<DummyFunc>().As<IDummyFunc>();
+                builder.RegisterType<DummyEnumerable>();
             }
         }
 
@@ -39,7 +41,9 @@ namespace AutofacVsCastle
             public void Install(IWindsorContainer container, IConfigurationStore store)
             {
                 container.Register(Component.For<IDummy>().ImplementedBy<Dummy>());
+                container.Register(Component.For<IDummy>().ImplementedBy<DummyDummy>());
                 container.Register(Component.For<IDummyFunc>().ImplementedBy<DummyFunc>());
+                container.Register(Component.For<DummyEnumerable>());
             }
         }
 
@@ -47,6 +51,8 @@ namespace AutofacVsCastle
         {
             var container = new WindsorContainer();
             container.AddFacility<TypedFactoryFacility>();
+            container.Kernel.Resolver.AddSubResolver(new CollectionResolver(container.Kernel));
+
             container.Install(new Installer());
 
             return container;
