@@ -78,6 +78,8 @@
     <Compile Include="2_RegisterDependencies\Dependencies\DummyFunc.cs" />
     <Compile Include="2_RegisterDependencies\Dependencies\IDummy.cs" />
     <Compile Include="2_RegisterDependencies\Dependencies\IDummyFunc.cs" />
+    <Compile Include="2_RegisterDependencies\Dependencies\IInstance.cs" />
+    <Compile Include="2_RegisterDependencies\Dependencies\Instance.cs" />
     <Compile Include="2_RegisterDependencies\Registration.cs" />
     <Compile Include="2_RegisterDependencies\RegistrationModules.cs" />
     <Compile Include="3_Resolve\EnumerableResolver.cs" />

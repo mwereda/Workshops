@@ -44,6 +44,9 @@ namespace AutofacVsCastle
                 container.Register(Component.For<IDummy>().ImplementedBy<DummyDummy>());
                 container.Register(Component.For<IDummyFunc>().ImplementedBy<DummyFunc>());
                 container.Register(Component.For<DummyEnumerable>());
+
+                container.Register(Component.For<IInstance>().Instance(new Instance()));
+                container.Register(Component.For<IInstance>().UsingFactoryMethod((c, i) => c.Resolve<IInstance>()).Named("name"));
             }
         }
 
