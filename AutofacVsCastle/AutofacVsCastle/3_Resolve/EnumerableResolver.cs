@@ -21,7 +21,7 @@ namespace AutofacVsCastle
         {
             IContainer autofacContainer = this.registration.RegisterAutofac();
 
-            var dummy = autofacContainer.Resolve <DummyEnumerable>();
+            var dummy = autofacContainer.Resolve<DummyEnumerable>();
 
             Assert.NotNull(dummy);
             Assert.Equal(2, dummy.Dummies.Count());
